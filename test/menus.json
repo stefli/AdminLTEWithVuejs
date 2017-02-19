@@ -1,0 +1,34 @@
+{
+  "menus": [
+    {
+      "title": "系统管理",
+      "url": "/admin/",
+      "iconClass": "fa fa-laptop",
+      "hasChild": true,
+      "isActive": true,
+      "subMenus": [
+        {
+          "title": "用户管理",
+          "url": "/users/",
+          "iconClass": "fa fa-circle-o",
+          "isActive": true
+        },
+        {
+          "title": "用户组管理",
+          "url": "/groups/",
+          "iconClass": "fa fa-circle-o"
+        },
+        {
+          "title": "角色管理",
+          "url": "/roles/",
+          "iconClass": "fa fa-circle-o"
+        },
+        {
+          "title": "权限管理",
+          "url": "/privileges/",
+          "iconClass": "fa fa-circle-o"
+        }
+      ]
+    }
+  ]
+}
