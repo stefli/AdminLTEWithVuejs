@@ -1,0 +1,94 @@
+{
+  "menus": [
+    {
+      "title": "我的桌面",
+      "url": "/",
+      "iconClass": "fa fa-dashboard",
+      "hasChild": true,
+      "subMenus": [
+        {
+          "title": "我的桌面",
+          "url": "/dashboard",
+          "iconClass": "fa fa-dashboard"
+        }
+      ]
+    },
+    {
+      "title": "系统管理",
+      "url": "/system",
+      "iconClass": "fa fa-laptop",
+      "hasChild": true,
+      "subMenus": [
+        {
+          "title": "用户管理",
+          "url": "/system/users/",
+          "iconClass": "fa fa-user"
+        },
+        {
+          "title": "用户组管理",
+          "url": "/system/groups/",
+          "iconClass": "fa fa-users"
+        },
+        {
+          "title": "角色管理",
+          "url": "/system/roles/",
+          "iconClass": "fa fa-cube"
+        },
+        {
+          "title": "权限管理",
+          "url": "/system/privileges/",
+          "iconClass": "fa fa-eye"
+        }
+      ]
+    },
+    {
+      "title": "基础信息管理",
+      "url": "/base",
+      "iconClass": "fa fa-share",
+      "hasChild": true,
+      "subMenus": [
+        {
+          "title": "商家管理",
+          "url": "/base/clients/",
+          "iconClass": "fa fa-star"
+        },
+        {
+          "title": "承运商管理",
+          "url": "/base/carriers/",
+          "iconClass": "fa fa-user-secret"
+        },
+        {
+          "title": "宅配商管理",
+          "url": "/base/takingDeliveries/",
+          "iconClass": "fa fa-user-plus"
+        }
+      ]
+    },
+    {
+      "title": "仓库管理",
+      "url": "/warehouse",
+      "iconClass": "fa fa-th",
+      "hasChild": true,
+      "subMenus": [
+        {
+          "title": "入库管理",
+          "url": "/warehouse/inbounds/",
+          "iconClass": "fa fa-table"
+        }
+      ]
+    },
+    {
+      "title": "报表管理",
+      "url": "/report",
+      "iconClass": "fa fa-bar-chart",
+      "hasChild": true,
+      "subMenus": [
+        {
+          "title": "承运商运力报表",
+          "url": "/report/carriers/",
+          "iconClass": "fa fa-line-chart"
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 <template>
 	<aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <section class="sidebar" style="height: auto;">
 
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
@@ -17,14 +17,17 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-      	<li class="treeview" v-for="menu in menus">
-          <a href="#"><i :class="menu.iconClass"></i> <span>{{menu.title}}</span>
+        <li v-for="menu in menus" :class='{treeview:menu.subMenus,active:$route.path.indexOf(menu.url)>=0}'>
+          <a href="#">
+            <i :class="menu.iconClass"></i> <span>{{menu.title}}</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li v-for="submenu in menu.subMenus"><a v-bind:href="submenu.url"><i :class="submenu.iconClass"></i>{{submenu.title}}</a></li>
+          <ul class="treeview-menu" v-show='$route.path.indexOf(menu.url)>=0'>
+            <router-link tag="li" :to="submenu.url" activeClass="active" v-for="submenu in menu.subMenus">
+              <a href="#"><i :class="submenu.iconClass"></i> {{submenu.title}}</a>
+            </router-link>
           </ul>
         </li>
        </ul>
@@ -49,12 +52,17 @@ export default {
 		}
 	},
 	created () {
-		axios.get('/api/menus.json').then((response) => {
-			this.menus = response.data.menus
-		}, (err) => {
-			console.log(err)
-		})
-	}
+		this.getMenus()
+	},
+  methods: {
+    getMenus: function() {
+      axios.get('/static/menus.json').then((response) => {
+      this.menus = response.data.menus
+    }, (err) => {
+      console.log(err)
+    })
+    }
+  }
 }
 </script>
 

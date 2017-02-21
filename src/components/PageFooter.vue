@@ -13,9 +13,9 @@ export default {
   data () {
   	return {
   		year: '2017',
-  		company: 'Jiuye SCM',
+  		company: '上海久耶供应链管理有限公司',
   		website: 'http://www.jiuyescm.com',
-  		version: '3.0.0'
+  		version: 'v3.0.0'
   	}
   }
 }

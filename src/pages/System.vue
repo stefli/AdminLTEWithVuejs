@@ -1,9 +1,9 @@
 <template>
-  <p>About page</p>
+  <router-view></router-view>
 </template>
 
 <script>
   export default {
-    name: 'about'
+    name: 'system'
   }
 </script>

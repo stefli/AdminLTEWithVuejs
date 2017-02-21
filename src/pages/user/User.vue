@@ -1,98 +1,119 @@
 <template>
-  <main-layout>
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <h1>
-          用户管理
-          <small>用户信息列表</small>
-        </h1>
-        <ol class="breadcrumb">
-          <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-          <li class="active">用户管理中心</li>
-        </ol>
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-        <div class="box">
-          <!-- /.box-header -->
-          <div class="box-body">
-            <table class="table table-bordered">
-              <tr>
-                <th style="width: 40px">#</th>
-                <th style="width: 220px">姓名</th>
-                <th>电子邮箱</th>
-                <th style="width: 240px">操作</th>
-              </tr>
-              <tr v-for="user in users">
-                <td>{{ user.id }}</td>
-                <td><router-link :to="{ name: 'userDetail', params: { id: user.id }}">{{user.firstName}} {{user.lastName}}</router-link></td>
-                <td><span>{{user.email}}</span></td>
-                <td><router-link  class="btn btn-xs btn-primary" :to="{ name: 'userEdit', params: { id: user.id }}">修改</router-link> <button
-                class="btn btn-xs btn-danger delete-button" @click="delete(user)">删除</button></td>
-              </tr>
-            </table>
-          </div>
-          <!-- /.box-body -->
-          <div class="box-footer clearfix">
-            <ul class="pagination pagination-sm no-margin pull-right">
-              <li><a href="#">&laquo;</a></li>
-              <li><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">&raquo;</a></li>
-            </ul>
-          </div>
+    <section class="content">
+      <div class="box">
+        <div class="box-body">
+          <form class="form-inline" @submit.prevent="onSubmit">
+            <input type="text" class="form-control" id="inlineFormInput" placeholder="请输入用户名">
+            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="请输入电子邮箱">
+            <button type="submit" class="btn btn-primary" @click="search">查询</button>
+          </form>
         </div>
-        <!-- /.box -->
-      </section>
-      <!-- /.content -->
-    </div>
-  </main-layout>
+      </div>
+
+      <div class="box">
+        <!-- /.box-header -->
+        <div class="box-body">
+          <form class="form-inline" @submit.prevent="onSubmit">
+            <router-link to="/system/users/create/" class="btn btn-primary">添加</router-link>
+            <button type="button" class="btn btn-primary">删除选中项</button>
+          </form>
+          <br />
+          <el-table :data="users" border style="width: 100%" :default-sort = "{prop: 'id', order: 'descending'}"
+            @selection-change="handleSelectionChange">
+            <el-table-column type="selection" width="54"></el-table-column>
+            <el-table-column label="头像" width="100">
+            <template scope="scope">
+              <img v-bind:src="scope.row.img" width="32" height="32" />
+            </template>
+            </el-table-column>
+            <el-table-column prop="id" label="序号" sortable width="180"></el-table-column>
+            <el-table-column prop="firstName" label="姓名" sortable width="180"></el-table-column>
+            <el-table-column prop="email" label="电子邮箱"></el-table-column>
+            <el-table-column label="操作">
+              <template scope="scope">
+                <el-button
+                  size="small"
+                  @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                <el-button
+                  size="small"
+                  type="danger"
+                  @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer clearfix">
+          <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage4"
+            :page-sizes="[100, 200, 300, 400]"
+            :page-size="100"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="400">
+          </el-pagination>
+        </div>
+      </div>
+      <!-- /.box -->
+    </section>
+    <!-- /.content -->
+  </div>
 </template>
 
 <script>
-  import MainLayout from '../../layouts/Main'
   import axios from 'axios'
+  import toastr from 'toastr'
 
   export default {
     data () {
       return {
-        users: []
+        users: [],
+        multipleSelection: [],
+        currentPage1: 5,
+        currentPage2: 5,
+        currentPage3: 5,
+        currentPage4: 4
       }
     },
-    components: {
-      MainLayout
-    },
     created () {
-  		axios.get('/api/users.json').then((response) => {
+  		axios.get('/static/users.json').then((response) => {
   			this.users = response.data.users
   		}, (err) => {
   			console.log(err)
   		})
   	},
     methods: {
+      handleSelectionChange: function(val) {
+        this.multipleSelection = val;
+      },
       update: function(user) {
-        axios.post('/api/users/')
+        axios.post('/static/users/')
             .then((response) => {
               console.log("update")
             })
       },
       delete: function(user) {
-        alert(2)
         if(confirm("您确定要删除该记录？ ")) {
-          axios.post('/api/users/')
+          axios.post('/static/users/')
             .then((response) => {
               this.users.$remove(user)
             })
         }
+      },
+      handleSizeChange: function(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange: function(val) {
+        this.currentPage = val;
+        console.log(`当前页: ${val}`);
+      },
+      handleEdit: function(a, b) {
+        toastr.success('Hello')
+      },
+      search: function(key) {
+        return
       }
     }
   }
 </script>
-
-<style>
-  @import '../../assets/less/table.less'
-</style>

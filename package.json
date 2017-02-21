@@ -12,8 +12,10 @@
     "bootstrap": "^3.3.7",
     "bootstrap-webpack": "0.0.5",
     "css-loader": "^0.26.1",
+    "element-ui": "^1.1.6",
     "fastclick": "^1.0.6",
     "font-awesome": "^4.7.0",
+    "iview": "^0.9.17",
     "jquery": "^3.1.1",
     "jquery-slimscroll": "^1.3.8",
     "less": "^2.7.2",
@@ -21,10 +23,12 @@
     "sass": "^0.5.0",
     "sass-loader": "^6.0.0",
     "style-loader": "^0.13.1",
+    "toastr": "^2.1.2",
     "vue": "^2.1.10",
     "vue-datatable": "^1.0.4",
     "vue-router": "^2.2.1",
-    "vue-style-loader": "^2.0.0"
+    "vue-style-loader": "^2.0.0",
+    "vuex": "^2.1.2"
   },
   "repository": {
     "type": "git",

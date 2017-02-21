@@ -79,23 +79,3 @@ module.exports = app.listen(port, function (err) {
     opn(uri)
   }
 })
-
-// Test api
-var userData = require('../test/users.json')
-var users = userData.users
-var menuData = require('../test/menus.json')
-var menus = menuData.menus
-
-var apiRoutes = express.Router()
-apiRoutes.get('/users.json', function(req, res) {
-  res.json({
-    users: users
-  })
-})
-apiRoutes.get('/menus.json', function(req, res) {
-  res.json({
-    menus: menus
-  })
-})
-
-app.use('/api', apiRoutes)
